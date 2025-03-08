@@ -15,7 +15,9 @@ sourceSets {
 }
 
 tasks.register('run', JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    mainClass = "Initer"  
+    
+  println "Running Initer class on default settings!"
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = "Initer"  
 }
 

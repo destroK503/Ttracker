@@ -1,7 +1,10 @@
-
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.Path;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -16,17 +19,20 @@ import java.time.LocalDateTime;
  * </p>
  *
  *
- * <code>
- *  === 1 // this will be the index of the task
- *    
+ * <p>
+ * === 1 // this will be the index of the task
+ * </p>
+ * <p>
  *  NAME: <Name for the tasks 
+ * </p> 
+ * <p> 
  *  DATE: <time thet task was created>
+ * </p> 
+ * <p> 
  *  TYPE: <tyoe> // this can something like 'school' or 'family'
- *
- *
- *  ===
- *
- * </code>
+ *  </p>
+ * ===
+ * 
  *
  */
 public class TaskWritter {
@@ -51,21 +57,20 @@ public class TaskWritter {
 
 
   public static void write(String task, String type){
-    //if (!initer())
-      //return;
+    if (!initer())
+      return;
 
     String data = String.format(
       "===%nNAME: %s%nDATE: %s%nTIME: %s%nTYPE:%s%n===",
       task,
+      getCurrentDate(),
       getCurrentTime(),
       type
     );
 
     System.out.println(data);
 
-
-    System.out.println("'Write' method has not been implemented yet");
-    return;
+    internalWritter(data);
   }
 
 
@@ -93,16 +98,26 @@ public class TaskWritter {
 
   }
 
-
-  private static void internal_writter(){
-
+  private static String getCurrentDate(){
+    return String.format("%s", LocalDate.now());
   }
 
 
+  private static void internalWritter(String data){
+
+    try (
+      BufferedWriter bf = Files.newBufferedWriter(path, StandardOpenOption.APPEND)
+    ){
+      bf.newLine();
+      bf.write(data);
+    } catch (IOException e){
+      e.printStackTrace();
+      return;
+    }
+  }
 
   public static void main(String[] args) {
-    System.out.println("Entering debug mode!");
-    write("Do something", "school");
+    write("Something important", "city");
   }
- 
+
 }
