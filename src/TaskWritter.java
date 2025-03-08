@@ -41,8 +41,6 @@ public class TaskWritter {
     ".Ttracker",
     "Tasks"
   );
-  private record metaData(double time, String type)
-  {}
   
   private static boolean initer(){
     if (!Files.exists(path)){
@@ -56,15 +54,16 @@ public class TaskWritter {
   }
 
 
-  public static void write(String task, String type){
+  public static void write(String task, String type, String status){
     if (!initer())
       return;
 
     String data = String.format(
-      "===%nNAME: %s%nDATE: %s%nTIME: %s%nTYPE:%s%n===",
+      "===%nNAME: %s%nDATE: %s%nTIME: %s%nSTATUS: %s%nTYPE: %s%n===",
       task,
       getCurrentDate(),
       getCurrentTime(),
+      status,
       type
     );
 
@@ -73,6 +72,9 @@ public class TaskWritter {
     internalWritter(data);
   }
 
+  public static void write(String task, String type){
+    write(task, type, "pending");
+  }
 
   /*=====================
    *
@@ -94,7 +96,7 @@ public class TaskWritter {
     int hora12 = (hours == 0) ? 12 : (hours > 12 ? hours - 12 : hours);
     String periodo = (hours < 12) ? "AM" : "PM";
 
-    return String.format("%02d:%02d:%02d %s%n", hora12, min, segundos, periodo);
+    return String.format("%02d:%02d:%02d %s", hora12, min, segundos, periodo);
 
   }
 
@@ -118,6 +120,7 @@ public class TaskWritter {
 
   public static void main(String[] args) {
     write("Something important", "city");
+    write("Something even more important", "School", "delayed");
   }
 
 }

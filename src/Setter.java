@@ -18,8 +18,8 @@ public class Setter {
       ".Ttracker");
 
   private static String[] filesToBeCreated = {
-      "task",
-      "done",
+      "Tasks",
+      "Done",
   };
 
   public static void init() {

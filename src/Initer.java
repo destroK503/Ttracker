@@ -17,11 +17,24 @@ public class Initer {
    *
    */
   public static void main(String[] args) {
+    TaskReader reader = new TaskReader();
+
     if (!Files.exists(dirPath)) {
       Setter.init();
-    } else {
+    } 
+    if (args.length <= 0){
       System.out.println("Everyhting good to go!");
+      System.out.println("Try passing the 'help' argument");
     }
+
+    for (String arg : args){
+      if (arg.equals("pending"))
+        TaskPrinter.printTask(reader.getTasks());
+
+      if (arg.equals("help"))
+        helpPrinter.print();
+    }
+
   }
 
 }
