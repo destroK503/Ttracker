@@ -1,0 +1,6 @@
+/**
+ * tuiMain
+ */
+public class tuiMain {
+
+}

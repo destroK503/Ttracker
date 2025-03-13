@@ -35,6 +35,8 @@ public class Initer {
         helpPrinter.print();
     }
 
+    tuiWindows tw = new tuiWindows();
+    tw.close();
   }
 
 }

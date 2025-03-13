@@ -1,6 +1,13 @@
 plugins {
     id 'java'
+    id 'application'
+
 }
+
+dependencies {
+  implementation files("src/external/jna-jpms-5.16.0.jar")
+}
+
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17  
@@ -14,16 +21,21 @@ sourceSets {
     }
 }
 
+
 jar {
+  from {
+    configurations.runtimeClasspath.filter {
+      it.name.contains("jna")
+    }.collect { zipTree(it) }
+  }
     manifest {
         attributes(
-            'Main-Class': 'Initer'         )
-    }
+          'Main-Class': 'Initer' 
+      )
+  }
 }
 
-
-
-tasks.register('run', JavaExec) {
+tasks.named('run') {
     
   println "Running Initer class on default settings!"
   classpath = sourceSets.main.runtimeClasspath
