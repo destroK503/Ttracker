@@ -1,3 +1,5 @@
+java import java.util.Random;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -34,6 +36,8 @@ public class tuiWindows {
   int originalMode;
   Pointer stdIn;
   Kernel32 k32;
+  boolean isStoped = false;
+  boolean shouldClose = false;
 
   public tuiWindows() {
     k32 = Kernel32.INSTANCE;
@@ -64,25 +68,69 @@ public class tuiWindows {
           k32.GetLastError());
       return;
     }
-
-    System.out.println("¡Ahora estás en modo raw!");
   }
 
   public void close() {
     k32.SetConsoleMode(stdIn, originalMode);
+    isStoped = true;
   }
 
 
 
- // public _Task tuiForWritter(){
-  //}
+  /*
+   * Will generate a element in screen like this:
+   *
+   * ==========
+   *  TASK:
+   *  DESCRIPTION:
+   *
+   *  DONE
+   * ==========
+   *
+   */
+  public _Task tuiForWritter() {
+
+    final String label = "Name for yout task here";
+    final String label2 = "description for your taks";
+    final String label3 = "type";
+    final String buttonLabel = "DONE";
+
+    if (isStoped) {
+      System.out.println("Could no create input TUI!");
+      System.out.println("Non valid intance of tuiWindows could be found!");
+      return new _Task("", "", "", "", "");
+    }
+
+    // We need to make a method to print the chars as
+    // a window
+
+    // for (int i = 0; i < 20; i++){
+    // for (int j = 0; j < 10; j++) {
+    // }
+    // }
+
+    int seconds = 0;
+    System.out.println(_TuiCodesWindows.CLEAR_SCREEN);
+
+    while (!shouldClose) {
+      seconds++;
+    }
+
+    return new _Task("", "", "", "", "");
+
+  }
 
   /*
    *
-   * Helpers 
+   * Helpers
    *
-   */ 
+   */
 
+  private static void _Helper_drawTuiForWritter(){
+    for (int i = 0; i < max; i++) {
+      for (int j= 0; j < max; i++) {
 
-
+      }
+    }
+  }
 }
