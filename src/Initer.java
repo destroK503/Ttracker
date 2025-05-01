@@ -21,13 +21,13 @@ public class Initer {
 
     if (!Files.exists(dirPath)) {
       Setter.init();
-    } 
-    if (args.length <= 0){
+    }
+    if (args.length <= 0) {
       System.out.println("Everyhting good to go!");
       System.out.println("Try passing the 'help' argument");
     }
 
-    for (String arg : args){
+    for (String arg : args) {
       if (arg.equals("pending"))
         TaskPrinter.printTask(reader.getTasks());
 
@@ -35,8 +35,12 @@ public class Initer {
         helpPrinter.print();
     }
 
-    tuiWindows tw = new tuiWindows();
-    tw.close();
+
+    tuiWindows tui = new tuiWindows();
+
+    tui.inputForNewTask();
+
+    tui.close();
   }
 
 }
