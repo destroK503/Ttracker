@@ -17,8 +17,6 @@ public class Initer {
    *
    */
   public static void main(String[] args) {
-    TaskReader reader = new TaskReader();
-
     if (!Files.exists(dirPath)) {
       Setter.init();
     }
@@ -34,6 +32,8 @@ public class Initer {
       if (arg.equals("help"))
         helpPrinter.print();
     }
+    _Task poke = tuiwindows.tuiForWritter();
+    tuiwindows.close();
 
 
     tuiWindows tui = new tuiWindows();
